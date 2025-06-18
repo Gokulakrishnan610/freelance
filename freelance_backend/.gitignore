@@ -4,3 +4,4 @@ env2/
 ENV/
 env.bak/
 venv.bak/
+db.sqlite3
