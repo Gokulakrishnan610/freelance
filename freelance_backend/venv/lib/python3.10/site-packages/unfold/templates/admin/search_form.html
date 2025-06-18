@@ -1,0 +1,21 @@
+{% load i18n static %}
+
+{% if cl.search_fields %}
+    <div id="toolbar">
+        <form id="changelist-search" method="get" role="search">
+            <div class="bg-white border border-base-200 flex rounded-default overflow-hidden shadow-xs lg:w-96 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 dark:bg-base-900 dark:border-base-700">
+                <input class="font-medium grow min-w-0 h-9 px-3 text-font-default-light text-sm focus:outline-hidden dark:bg-base-900 dark:text-font-default-dark placeholder-shown:truncate placeholder-base-400" type="text" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" placeholder="{% if cl.search_help_text %}{{ cl.search_help_text }}{% else %}{% trans "Type to search" %}{% endif %}" />
+
+                <button type="submit" class="flex items-center px-2 focus:outline-hidden" id="searchbar-submit">
+                    <span class="material-symbols-outlined md-18 text-base-400 dark:text-base-500">search</span>
+                </button>
+            </div>
+
+            {% for pair in cl.filter_params.items %}
+                {% for val in pair.1 %}
+                    {% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ val }}">{% endif %}
+                {% endfor %}
+            {% endfor %}
+        </form>
+    </div>
+{% endif %}
